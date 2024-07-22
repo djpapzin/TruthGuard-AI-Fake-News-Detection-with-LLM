@@ -1,54 +1,84 @@
-# TruthGuard-AI-Fake-News-Detection-with-Llama-3
+# TruthGuard-AI Backend
 
-AI-driven fake news detection system using Together AI's fine-tuned Llama 3 model. Classifies news articles as real or fake in real-time.
+## Overview
+
+TruthGuard-AI is an AI-driven fake news detection system that uses a fine-tuned Llama 3 model to classify news articles as real or fake in real-time. This backend service provides an API endpoint for news article classification.
+
+## Features
+
+- Real-time classification of news articles
+- Uses Together AI's fine-tuned Llama 3 model
+- Flask-based API for easy integration
+- Supports both system and user messages for context
+- Basic error handling and logging
 
 ## Prerequisites
 
 - Python 3.7 or later
-- An API key from Together
+- Flask
+- Together AI account and API key
 
 ## Installation
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/fake-news-classification.git
-    cd fake-news-classification
-    ```
+   ```
+   git clone https://github.com/djpapzin/TruthGuard-AI.git
+   cd TruthGuard-AI
+   ```
 
 2. Install the required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```
+   pip install -r requirements.txt
+   ```
 
-3. Set your Together API key as an environment variable:
-    - On Unix-based systems, add this line to your `.bashrc` or `.zshrc` file:
-      ```bash
-      export TOGETHER_API_KEY='your_api_key_here'
-      ```
-    - On Windows, set the environment variable through the System Properties.
+3. Set up your Together AI API key in:
+   ```
+   export TOGETHER_API_KEY='your_api_key_here'
+   ```
 
 ## Usage
 
-Run the classification script with a sample article:
-```bash
-python classify_news.py
-```
+1. Start the Flask server:
+   ```
+   python app.py
+   ```
 
-The script will output whether the given news article is classified as real or fake.
+2. The API will be available at `http://localhost:5000`
 
-## Example
+3. To classify a news article, send a POST request to `/classify` with the following JSON payload:
+   ```json
+   {
+     "article": "Your news article text here"
+   }
+   ```
 
-Here's an example of running the script:
+4. The API will respond with a classification result:
+   ```json
+   {
+     "classification": "real" or "fake"
+   }
+   ```
 
-```bash
-$ python classify_news.py
-Classification result: Fake
-```
+## API Endpoints
 
-## Files
+- `POST /classify`: Classifies a news article as real or fake
+- `GET /`: Returns a simple message (can be used as a health check)
 
-- `classify_news.py`: The main script for classifying news articles.
-- `requirements.txt`: Lists the dependencies needed for the project.
+## Model Information
+
+The backend uses a fine-tuned Llama 3 model hosted on Together AI. The model was trained on the WELFake Dataset, which contains a collection of real and fake news articles.
+
+## Future Improvements
+
+- Implement user authentication and rate limiting
+- Add support for batch classification
+- Integrate with a frontend application for a complete user interface
+- Implement caching to improve performance
+- Add more comprehensive error handling and input validation
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
