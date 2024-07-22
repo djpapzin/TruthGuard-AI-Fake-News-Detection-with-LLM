@@ -1,6 +1,6 @@
-# TruthGuard-AI-Fake-News-Detection-with-LLM
+# TruthGuard-AI-Fake-News-Detection-with-Llama-3
 
-AI-driven fake news detection system using Together AI's fine-tuned Llama 3 model. Classifies news articles as real or fake in real-time. Features React frontend for user interaction and Python serverless backend for secure API integration. Combat misinformation with advanced NLP technology.
+AI-driven fake news detection system using Together AI's fine-tuned Llama 3 model. Classifies news articles as real or fake in real-time.
 
 ## Prerequisites
 
