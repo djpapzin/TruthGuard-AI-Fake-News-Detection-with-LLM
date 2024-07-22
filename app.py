@@ -9,19 +9,38 @@ api_key = os.environ.get('TOGETHER_API_KEY')
 client = Together(api_key=api_key)
 
 def classify_news(article):
-    system_prompt = "You are an AI model fine-tuned to classify news articles as real or fake. Respond with 'Real' or 'Fake' based on the given article."
-    prompt = f"{system_prompt}\n\nArticle: {article}\n\nClassification:"
+    system_message = {
+        "role": "system",
+        "content": "You are a fake news detection AI. Your task is to determine whether the following news article is real or fake. Respond with 'real' or 'fake'.\n"
+    }
+    user_message = {
+        "role": "user",
+        "content": article
+    }
+    
     try:
-        output = client.completions.create(
+        response = client.chat.completions.create(
             model="reemamemon/Meta-Llama-3-8B-Instruct-fake-news-detection-2024-07-20-17-48-54-aeb6d725",
-            prompt=prompt,
-            max_tokens=10,
-            temperature=0.0,
-            top_p=1.0,
-            stop=["\n"]
+            messages=[system_message, user_message],
+            max_tokens=512,
+            temperature=0.7,
+            top_p=0.7,
+            top_k=50,
+            repetition_penalty=1,
+            stop=[""]
         )
-        return output.choices[0].text.strip()
+        response_text = response.choices[0].message.content.strip().lower()
+        print(f"DEBUG: System message - {system_message}")  # Debug logging for system message
+        print(f"DEBUG: User message - {user_message}")  # Debug logging for user message
+        print(f"DEBUG: Model response - {response_text}")  # Debug logging for model response
+
+        if response_text not in ["real", "fake"]:
+            print(f"ERROR: Invalid response - {response_text}")  # Error logging for invalid response
+            return "Article could not be analyzed, please try again with different article"
+
+        return response_text
     except Exception as e:
+        print(f"ERROR: {str(e)}")  # Error logging
         return f"An error occurred: {str(e)}"
 
 @app.route('/classify', methods=['POST'])
@@ -36,4 +55,4 @@ def index():
     return jsonify({"message": "Please use POST method to classify news"})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
