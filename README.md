@@ -3,6 +3,8 @@
 ## Project Overview
 TruthGuard is an AI-powered system designed to combat fake news through advanced AI and content moderation. The project leverages technologies like Llama 3 to distinguish between authentic and misleading information in real-time across digital platforms. This README focuses on the backend implementation of the project.
 
+![Demo Image](./screenshot.jpg)
+
 ## Key Features
 - Real-time detection of fake news using AI algorithms
 - Content moderation to ensure trustworthy information dissemination
