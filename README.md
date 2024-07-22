@@ -1,6 +1,6 @@
-# Fake News Classification with Meta-Llama-3-8B-Instruct
+# TruthGuard-AI-Fake-News-Detection-with-LLM
 
-This project uses the `Meta-Llama-3-8B-Instruct` model to classify news articles as real or fake. The model is fine-tuned to specifically handle this task.
+AI-driven fake news detection system using Together AI's fine-tuned Llama 3 model. Classifies news articles as real or fake in real-time. Features React frontend for user interaction and Python serverless backend for secure API integration. Combat misinformation with advanced NLP technology.
 
 ## Prerequisites
 
