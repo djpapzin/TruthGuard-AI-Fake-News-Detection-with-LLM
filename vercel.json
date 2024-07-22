@@ -1,0 +1,14 @@
+{
+    "builds": [
+      {
+        "src": "api/classify.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/classify",
+        "dest": "api/classify.py"
+      }
+    ]
+  }
