@@ -1,9 +1,8 @@
-# api/classify.py
-
 import os
-from http.server import BaseHTTPRequestHandler
+from flask import Flask, request, jsonify
 from together import Together
-import json
+
+app = Flask(__name__)
 
 # Initialize the Together client
 api_key = os.environ.get('TOGETHER_API_KEY')
@@ -25,24 +24,16 @@ def classify_news(article):
     except Exception as e:
         return f"An error occurred: {str(e)}"
 
-class handler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        data = json.loads(post_data.decode('utf-8'))
-        
-        article = data.get('article', '')
-        result = classify_news(article)
+@app.route('/classify', methods=['POST'])
+def classify():
+    data = request.get_json()
+    article = data.get('article', '')
+    result = classify_news(article)
+    return jsonify({"classification": result})
 
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        response = json.dumps({"classification": result})
-        self.wfile.write(response.encode())
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "Please use POST method to classify news"})
 
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        response = json.dumps({"message": "Please use POST method to classify news"})
-        self.wfile.write(response.encode())
+if __name__ == '__main__':
+    app.run()
