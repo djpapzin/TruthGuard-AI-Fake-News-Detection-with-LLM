@@ -1,212 +1,70 @@
-# TruthGuard-AI Backend
+# TruthGuard: AI-Powered Fake News Detector
 
-## Overview
-
-# TruthGuard-AI Backend
-
-## Overview
-
-TruthGuard-AI is an advanced AI-driven fake news detection system that leverages natural language processing and machine learning to accurately identify and flag potential instances of fake news. Our cutting-edge technology examines content, source, and spread patterns to provide reliable, real-time information verification.
-
-## The Problem
-
-Fake news is a widespread issue with serious consequences:
-1. Rapid dissemination through social media platforms
-2. Erosion of trust in legitimate news sources
-3. Negative impact on public opinion and decision-making
-4. Potential harm to individuals (financial losses, reputational damage, emotional distress)
-
-## Our Approach
-
-We've developed a robust AI-powered system that provides real-time analysis of news content with high accuracy detection. The system offers transparency and explainability in its assessments, empowering users to make informed decisions.
+## Project Overview
+TruthGuard is an AI-powered system designed to combat fake news through advanced AI and content moderation. The project leverages technologies like Llama 3 to distinguish between authentic and misleading information in real-time across digital platforms. This README focuses on the backend implementation of the project.
 
 ## Key Features
+- Real-time detection of fake news using AI algorithms
+- Content moderation to ensure trustworthy information dissemination
+- User-friendly interface for seamless interaction and feedback (frontend implementation)
 
-- Real-time classification of news articles
-- High accuracy detection using the fine-tuned Llama 3 model
-- Transparent explanations for the system's assessments
-- User-friendly API for easy integration
-- Support for both system and user messages for context
-- Basic error handling and logging
+## Technology Stack
+- Python 3.11
+- Flask (Web Framework)
+- Together AI (Llama 3 model)
+- Pandas (Data manipulation)
+- Scikit-learn (Machine Learning)
+- LlamaIndex (Knowledge graph system)
+- Milvus (Vector Database)
 
-## Technologies Used
-
-- **Llama-3 Model**: The backbone of our fake news detection engine, providing advanced text analysis capabilities
-- **LlamaIndex**: An innovative knowledge graph system for seamless integration and querying of diverse data sources
-- **Together AI**: Platform for model hosting and collaborative verification
-- **Milvus Vector Database**: High-performance vector database for efficient storage and querying of vast amounts of data
-- **Flask**: Web framework for the API
-
-## Prerequisites
-
-- Python 3.7 or later
-- Flask
-- Together AI account and API key
-
-## Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/djpapzin/TruthGuard-AI.git
-   cd TruthGuard-AI
-   ```
-
-2. Install the required packages:
+## Setup and Installation
+1. Clone the repository
+2. Install required dependencies:
    ```
    pip install -r requirements.txt
    ```
-
-3. Set up your Together AI API key:
-   ```
-   export TOGETHER_API_KEY='your_api_key_here'
-   ```
+3. Set up environment variables:
+   - `TOGETHER_API_KEY`: Your Together AI API key
 
 ## Usage
+To run the Flask application:
+```
+python app.py
+```
 
-1. Start the Flask server:
-   ```
-   python app.py
-   ```
-
-2. The API will be available at `http://localhost:5000`
-
-3. To classify a news article, send a POST request to `/classify` with the following JSON payload:
-   ```json
-   {
-     "article": "Your news article text here"
-   }
-   ```
-
-4. The API will respond with a classification result:
-   ```json
-   {
-     "classification": "real" or "fake",
-     "confidence": 0.95
-   }
-   ```
+The server will start running on `http://localhost:5000`.
 
 ## API Endpoints
+- `/classify` (POST): Classify a news article as real or fake
+  - Input: JSON object with an "article" key containing the news text
+  - Output: JSON object with a "classification" key indicating "real" or "fake"
 
-- `POST /classify`: Classifies a news article as real or fake
-- `GET /`: Returns a simple message (can be used as a health check)
-
-## How It Works
-
-1. **User Input**: Users submit a URL or content for analysis through the API.
-2. **Processing & Analysis**: 
-   - The submitted data is preprocessed and converted into numerical embeddings using the Llama-3 model.
-   - The system performs a context-based semantic search to compare the new article with known fake and real news.
-3. **Response**: The user receives a response indicating whether the news is likely fake or real, along with a confidence score.
-
-## Model Information
-
-The backend uses a fine-tuned Llama 3 model hosted on Together AI. The model was trained on the WELFake Dataset, which contains a collection of real and fake news articles.
+## Model Training
+The Llama 3 model was fine-tuned on the [WELFake](https://www.kaggle.com/datasets/saurabhshahane/fake-news-classification/data) dataset using Together AI's platform. The fine-tuning script is available in [fine_tune_llama3.py](./fine_tune_llama3.py) .
 
 ## Future Enhancements
-
-- Implement user authentication and rate limiting
-- Add support for batch classification
-- Integrate with a frontend application for a complete user interface
-- Implement caching to improve performance
-- Add more comprehensive error handling and input validation
-- Continuous improvement through machine learning algorithms
-- Multilingual support for detecting fake news in multiple languages
-- Automated monitoring to proactively scan online content
-- Seamless integration with popular social media platforms and news aggregators
-
-## Team
-
-- Reema Memon - NLP Engineer (Team Lead)
-- Sami Raza - AI Developer
-- Letlhogonolo Fanampe - AI Specialist
-- Wajahat Ali Hassan - Backend Developer
-- Muhammad Qasim - Frontend Developer
-- Muhammad Hassan - Full Stack Developer
+- Implement the KNN model and RAG pipeline as described in [fake-news-detection-full-code.py](./fake-news-detection-full-code.py)
+- Integrate Milvus vector database for efficient similarity search
+- Expand the system to handle multiple languages
+- Implement user feedback mechanism for continuous learning
 
 ## Contributing
+Contributions to improve TruthGuard are welcome. Please follow these steps:
+1. Fork the repository
+2. Create a new branch
+3. Make your changes and commit them
+4. Create a pull request
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.TruthGuard-AI is an AI-driven fake news detection system that uses a fine-tuned Llama 3 model to classify news articles as real or fake in real-time. This backend service provides an API endpoint for news article classification.
-
-## Features
-
-- Real-time classification of news articles
-- Uses Together AI's fine-tuned Llama 3 model
-- Flask-based API for easy integration
-- Supports both system and user messages for context
-- Basic error handling and logging
-
-## Prerequisites
-
-- Python 3.7 or later
-- Flask
-- Together AI account and API key
-
-## Installation
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/djpapzin/TruthGuard-AI.git
-   cd TruthGuard-AI
-   ```
-
-2. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-
-3. Set up your Together AI API key in:
-   ```
-   export TOGETHER_API_KEY='your_api_key_here'
-   ```
-
-## Usage
-
-1. Start the Flask server:
-   ```
-   python app.py
-   ```
-
-2. The API will be available at `http://localhost:5000`
-
-3. To classify a news article, send a POST request to `/classify` with the following JSON payload:
-   ```json
-   {
-     "article": "Your news article text here"
-   }
-   ```
-
-4. The API will respond with a classification result:
-   ```json
-   {
-     "classification": "real" or "fake"
-   }
-   ```
-
-## API Endpoints
-
-- `POST /classify`: Classifies a news article as real or fake
-- `GET /`: Returns a simple message (can be used as a health check)
-
-## Model Information
-
-The backend uses a fine-tuned Llama 3 model hosted on Together AI. The model was trained on the WELFake Dataset, which contains a collection of real and fake news articles.
-
-## Future Improvements
-
-- Implement user authentication and rate limiting
-- Add support for batch classification
-- Integrate with a frontend application for a complete user interface
-- Implement caching to improve performance
-- Add more comprehensive error handling and input validation
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Contact
+For more information, please contact:
+- **Letlhogonolo Fanampe**
+  - Email: Lfanampe@gmail.com
+  - GitHub: [djpapzin](https://github.com/djpapzin)
+  - LinkedIn: [linkedin.com/in/djpapzin](https://linkedin.com/in/djpapzin)
+
+Thank you for your interest in TruthGuard!
